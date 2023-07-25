@@ -1,9 +1,7 @@
 // Simple versioning system for plugins
 // Based on npm package 'semver' <https://github.com/npm/node-semver>
-
 // semantic versioning: (see semver.org)
 const semver = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/;
-
 /**
  * @internal
  * Compare pre-release tag of a version
@@ -11,39 +9,42 @@ const semver = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[
  * @param b second Version.pre
  * @returns {number} -1 if a is higher, 0 if same, 1 if b is higher
  */
-function comparePre(a: (string | number)[], b: (string | number)[]): -1 | 0 | 1 {
+function comparePre(a, b) {
     // both are empty
-    if (!a.length && !b.length) return 0;
+    if (!a.length && !b.length)
+        return 0;
     // one of them are empty
-    if (!a.length) return -1;
-    if (!b.length) return 1;
-    
+    if (!a.length)
+        return -1;
+    if (!b.length)
+        return 1;
     // iterate over a and b
     const len = Math.max(a.length, b.length);
     for (let i = 0; i < len; i++) {
         const first = a[i];
         const second = b[i];
-        
         // no one left
-        if (typeof first == "undefined") return 1;
-        if (typeof second == "undefined") return -1;
-        
+        if (typeof first == "undefined")
+            return 1;
+        if (typeof second == "undefined")
+            return -1;
         // check if these are number
         const firstNum = typeof first == "number";
         const secondNum = typeof second == "number";
-        
         // check if one of these are number
-        if (firstNum && !secondNum) return 1;
-        if (!firstNum && secondNum) return -1;
-        
+        if (firstNum && !secondNum)
+            return 1;
+        if (!firstNum && secondNum)
+            return -1;
         // numerically or lexicallly check
-        if (a < b) return 1;
-        if (a > b) return -1;
+        if (a < b)
+            return 1;
+        if (a > b)
+            return -1;
     }
     // a and b are the same
     return 0;
 }
-
 /**
  * Main versioning class
  */
@@ -53,25 +54,20 @@ export class Version {
      * @param ver The version string to compile
      * @throws This can throw errors
      */
-    constructor(ver: string) {
+    constructor(ver) {
         // trim leading and trailing whitespace
         ver = ver.trim();
-        
         // match the version string
         const match = ver.match(semver);
-        
         // failed to match
         if (!match)
             throw `unexpected version string: ${ver}`;
-        
         // process numbers
         this.major = +match[1];
         this.minor = +match[2];
         this.patch = +match[3];
-        
         if (isNaN(this.major) || isNaN(this.minor) || isNaN(this.patch))
             throw `major.minor.patch must be a number`;
-        
         // process pre release
         this.pre = match[4]?.split(".").map(v => {
             const n = +v;
@@ -79,42 +75,20 @@ export class Version {
                 return n;
             return v;
         }) || [];
-        
         // build metadata
         this.build = match[5]?.split(".") || [];
     }
-    /**
-     * Major version
-     */
-    public major: number;
-    /**
-     * Minor version
-     */
-    public minor: number;
-    /**
-     * Patch version
-     */
-    public patch: number;
-    /**
-     * Pre-release version
-     */
-    public pre: (string | number)[];
-    /**
-     * Build metadata
-     */
-    public build: string[];
     /**
      * Check if this version is technically greater than other
      * @param other Other version instance to compare
      * @returns {boolean}
      */
-    public gt(other: Version): boolean {
-        if (
-            (this.major > other.major) ||
+    gt(other) {
+        if ((this.major > other.major) ||
             (this.major == other.major && this.minor > other.minor) ||
             (this.major == other.major && this.minor == other.minor && this.patch > other.patch) ||
-            (this.major == other.major && this.minor == other.minor && this.patch == other.patch && comparePre(this.pre, other.pre) == -1)
-        ) return true;
+            (this.major == other.major && this.minor == other.minor && this.patch == other.patch && comparePre(this.pre, other.pre) == -1))
+            return true;
         return false;
     }
     /**
@@ -122,13 +96,12 @@ export class Version {
      * @param other Other version instance to compare
      * @returns {boolean}
      */
-    public lt(other: Version): boolean {
-        if (
-            (this.major < other.major) ||
+    lt(other) {
+        if ((this.major < other.major) ||
             (this.major == other.major && this.minor < other.minor) ||
             (this.major == other.major && this.minor == other.minor && this.patch < other.patch) ||
-            (this.major == other.major && this.minor == other.minor && this.patch == other.patch && comparePre(this.pre, other.pre) == 1)
-        ) return true;
+            (this.major == other.major && this.minor == other.minor && this.patch == other.patch && comparePre(this.pre, other.pre) == 1))
+            return true;
         return false;
     }
     /**
@@ -136,13 +109,12 @@ export class Version {
      * @param other Other version instance to compare
      * @returns {boolean}
      */
-    public eq(other: Version): boolean {
-        if (
-            (this.major == other.major) &&
+    eq(other) {
+        if ((this.major == other.major) &&
             (this.minor == other.minor) &&
             (this.patch == other.patch) &&
-            (comparePre(this.pre, other.pre) == 0)
-        ) return true;
+            (comparePre(this.pre, other.pre) == 0))
+            return true;
         return false;
     }
     /**
@@ -150,7 +122,7 @@ export class Version {
      * @param other Other version instance to compare
      * @returns {boolean}
      */
-    public gte(other: Version): boolean {
+    gte(other) {
         return this.gt(other) || this.eq(other);
     }
     /**
@@ -158,23 +130,23 @@ export class Version {
      * @param other Other version instance to compare
      * @returns {boolean}
      */
-    public lte(other: Version): boolean {
+    lte(other) {
         return this.lt(other) || this.eq(other);
     }
     /**
      * Returns a string representation of this version
      * @returns {string}
      */
-    toString(): string {
+    toString() {
         let str = `${this.major}.${this.minor}.${this.patch}`;
-        if (this.pre.length) str += "-" + this.pre.join(".");
-        if (this.build.length) str += "+" + this.build.join(".");
+        if (this.pre.length)
+            str += "-" + this.pre.join(".");
+        if (this.build.length)
+            str += "+" + this.build.join(".");
         return str;
     }
 }
-
 const expression = /^([*0xX]|[1-9]\d*)(?:\.([*0xX]|[1-9]\d*)(?:\.([*0xX]|[1-9]\d*))?)?(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/;
-
 /**
  * Version expression
  */
@@ -184,7 +156,7 @@ export class Expression {
      * @param expr The expression to compile
      * @throws This can throw errors
      */
-    constructor(expr: string) {
+    constructor(expr) {
         const comparators = [];
         for (const group of expr.split("||")) {
             const versions = group.trim().split(/\s+/);
@@ -225,11 +197,14 @@ export class Expression {
                     throw `invalid version expression: ${ver}`;
                 // process version number
                 let major = +match[1], xmajor;
-                if (isNaN(major)) xmajor = !(major = null);
+                if (isNaN(major))
+                    xmajor = !(major = null);
                 let minor = +match[2], xminor;
-                if (isNaN(minor)) xminor = !(minor = null);
+                if (isNaN(minor))
+                    xminor = !(minor = null);
                 let patch = +match[3], xpatch;
-                if (isNaN(patch)) xpatch = !(patch = null);
+                if (isNaN(patch))
+                    xpatch = !(patch = null);
                 const pre = match[4]?.split(".").map(v => {
                     const n = +v;
                     if (typeof n == "number" && n >= 0)
@@ -238,7 +213,8 @@ export class Expression {
                 }) || [];
                 // process tilde
                 if (tilde) {
-                    if (xmajor) continue;
+                    if (xmajor)
+                        continue;
                     let omajor, ominor, opatch;
                     if (xminor) {
                         omajor = major + 1;
@@ -267,17 +243,20 @@ export class Expression {
                 }
                 // process caret
                 else if (caret) {
-                    if (xmajor) continue;
+                    if (xmajor)
+                        continue;
                     let omajor, ominor, opatch;
                     if (xminor) {
                         omajor = major + 1;
                         ominor = minor = 0;
                         opatch = patch = 0;
-                    } else if (xpatch) {
+                    }
+                    else if (xpatch) {
                         omajor = major == 0 ? major : major + 1;
                         ominor = major != 0 ? 0 : minor + 1;
                         opatch = patch = 0;
-                    } else {
+                    }
+                    else {
                         omajor = major == 0 ? 0 : major + 1;
                         ominor = major == 0 ? minor == 0 ? minor : minor + 1 : 0;
                         opatch = (major == 0 && minor == 0) ? patch + 1 : 0;
@@ -304,31 +283,19 @@ export class Expression {
                     patch: patch,
                     pre: pre,
                 });
-            };
+            }
+            ;
             comparators.push(list);
         }
         this._compiled = comparators;
         this._expr = expr.split(/\s+/).join(" ");
     }
     /**
-     * @private
-     */
-    private _compiled: {
-        maxrange?: boolean,
-        equal: boolean,
-        compare: number,
-        major: number | null,
-        minor: number | null,
-        patch: number | null,
-        pre: (string | number)[],
-    }[][];
-    private _expr: string;
-    /**
      * Test if a version satisfies this expression
      * @param ver The version to test
      * @returns {boolean}
      */
-    public test(ver: Version): boolean {
+    test(ver) {
         for (const comparator of this._compiled) {
             let succed = true;
             for (const subj of comparator) {
@@ -390,7 +357,7 @@ export class Expression {
      * @param vers A list of Version object
      * @returns {Version}
      */
-    public latest(vers: Version[]): Version {
+    latest(vers) {
         // filter version lists first
         vers = vers.filter(v => this.test(v));
         // find max
@@ -405,7 +372,7 @@ export class Expression {
      * @param vers A list of Version object
      * @returns {Version}
      */
-    public oldest(vers: Version[]): Version {
+    oldest(vers) {
         // filter version list first
         vers = vers.filter(v => this.test(v));
         // find min
@@ -419,7 +386,7 @@ export class Expression {
      * Returns a string representation of this expression
      * @returns {string}
      */
-    toString(): string {
+    toString() {
         return this._expr;
     }
 }
