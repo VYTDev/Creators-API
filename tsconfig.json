@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "module": "es2020",
+        "moduleResolution": "node",
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+        "target": "es2020",
+        "lib": [
+            "es2020",
+            "dom"
+        ],
+        "preserveConstEnums": true,
+        "sourceMap": false,
+        "outDir": "./dist/generated",
+        "declaration": true,
+        "declarationDir": "./typings",
+        "allowJs": true,
+        "baseUrl": "./src"
+    },
+    "include": [
+        "./src"
+    ]
+}

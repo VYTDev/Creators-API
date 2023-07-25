@@ -1,0 +1,40 @@
+{
+    "name": "creators-api",
+    "version": "0.1.0",
+    "description": "A Minecraft Bedrock Edition script addon.",
+    "typings": "./typings/index.d.ts",
+    "type": "module",
+    "scripts": {
+        "test": "tsc && npm run lint",
+        "build": "tsc -b",
+        "clean": "rm -rf ./dist/",
+        "lint": "eslint \"./src/**\" --ext .ts",
+        "lint-fix": "eslint \"./src/**\" --ext .ts --fix"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/vytdev/vytdev.github.io.git"
+    },
+    "keywords": [
+        "minecraft",
+        "bedrock",
+        "gametest",
+        "add-ons"
+    ],
+    "author": "VYT",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/vytdev/vytdev.github.io/issues"
+    },
+    "homepage": "https://github.com/vytdev/vytdev.github.io#readme",
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^5.33.0",
+        "@typescript-eslint/parser": "^5.33.0",
+        "eslint": "^8.4.2",
+        "typescript": "^5.1.0"
+    },
+    "dependencies": {
+        "@minecraft/server": "^1.4.0-beta.1.20.10-preview.24",
+        "@minecraft/server-ui": "^1.0.0"
+    }
+}
