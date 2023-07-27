@@ -16,6 +16,7 @@ if (args[0] == "help" || args[0] == "?") {
 
 const { consoleLog, extendLine } = require("./jobs.js");
 const downloadFile = require("./downloader.js");
+const ver = require("./versioning.js");
 const fs = require("fs");
 const JSZip = require("jszip");
 
@@ -49,25 +50,31 @@ function ask(question) {
     // show versions
     consoleLog("available versions:")
     releases.forEach(v => consoleLog("  " + v.name));
+    const latest = new ver.Expression("*").latest(releases.map(v => new ver.Version(v.tag_name.slice(1)))).toString();
     let version, choosen;
     // ask the user
+    const query = `please choose a version [${latest}]: `;
     while (true) {
-        choosen = "v" + (await ask("please choose a version: ")).trim();
-        version = choosen.length == 0 ? releases[0] : releases.find(v => v.tag_name == choosen);
+        choosen = (await ask(query)).trim();
+        if (choosen.length == 0) choosen = latest;
+        choosen = "v" + choosen;
+        version = releases.find(v => v.tag_name == choosen);
         if (!version) {
             consoleLog("version not found, please select on the top");
             continue;
         }
+        choosen = version.tag_name;
         consoleLog("selected " + choosen);
         break;
     }
     // type declarations of the framework
     const types = version.assets.find(v => v.name == "framework-types.zip");
     // download type declarations
-    consoleLog(`downloading type declarations of Creators’ API Framework ${choosen} ...`);
+    consoleLog(`downloading ${choosen} types...`);
     let buf;
     try {
         buf = await downloadFile(types.browser_download_url);
+        extendLine(" done");
     } catch {
         consoleLog("failed to download types declaration package");
         process.exit(1);
