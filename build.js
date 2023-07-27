@@ -1,3 +1,5 @@
+(async () => {
+
 const fs = require("fs");
 const JSZip = require("jszip");
 const { build } = require("esbuild");
@@ -33,14 +35,14 @@ console.log("building distribution files...")
 
 // build bundles
 console.log("creating bundles");
-build({
+await build({
     entryPoints: ["./dist/generated/index.js"],
     outfile: "./dist/framework.js",
     format: "esm",
     bundle: true,
     minify: false,
 });
-build({
+await build({
     entryPoints: ["./dist/framework.js"],
     outfile: "./dist/framework.min.js",
     format: "esm",
@@ -91,3 +93,5 @@ lib.generateNodeStream({
     .on("finish", () => {
         console.log("created lib package");
     });
+
+})();

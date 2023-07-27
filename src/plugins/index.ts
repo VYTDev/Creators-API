@@ -128,6 +128,7 @@ export class Plugin {
      * @returns {Exports}
      * @throws This can throw errors
      */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public start(...intent: any[]): Exports {
         // resolve dependencies
         const libs: Libs = {};

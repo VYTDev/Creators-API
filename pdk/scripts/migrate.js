@@ -1,3 +1,19 @@
+// a script for changing api types declaration
+
+const help = () => console.log(`
+Plugin Framework Migrate
+
+  This can help you to easily change the type declarations of the API, by version.
+  
+  This script does not take any arguments except for 'help' and '?' alias
+`);
+
+const args = process.argv.slice(2);
+if (args[0] == "help" || args[0] == "?") {
+    help();
+    process.exit(0);
+}
+
 const { consoleLog, extendLine } = require("./jobs.js");
 const downloadFile = require("./downloader.js");
 const fs = require("fs");

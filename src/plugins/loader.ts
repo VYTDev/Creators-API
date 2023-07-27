@@ -12,6 +12,7 @@ export type Compiled = { [path: Filename]: Module };
 /**
  * Module callback
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Script = (this: Plugin, intent: any[], require: Require, module: Module, exports: Exports, global: Global) => void;
 /**
  * Require representation
@@ -20,10 +21,12 @@ export type Require = (path: string) => Exports;
 /**
  * Exports representation
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Exports = any;
 /**
  * Global representation
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Global =  { [key: string]: any };
 /**
  * Name of a module
@@ -191,6 +194,7 @@ export class Loader {
     /**
      * Additional parameters
      */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public intent: any[];
     /**
      * @private
@@ -202,6 +206,7 @@ export class Loader {
      * @param libs The dependencies
      * @param intent Optional additional parameters to pass
      */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public start(libs: Libs, intent: any[]): Exports {
         this.libs = libs;
         this.intent = intent;

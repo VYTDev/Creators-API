@@ -17,25 +17,25 @@ function comparePre(a: (string | number)[], b: (string | number)[]): -1 | 0 | 1 
     // one of them are empty
     if (!a.length) return -1;
     if (!b.length) return 1;
-    
+
     // iterate over a and b
     const len = Math.max(a.length, b.length);
     for (let i = 0; i < len; i++) {
         const first = a[i];
         const second = b[i];
-        
+
         // no one left
         if (typeof first == "undefined") return 1;
         if (typeof second == "undefined") return -1;
-        
+
         // check if these are number
         const firstNum = typeof first == "number";
         const secondNum = typeof second == "number";
-        
+
         // check if one of these are number
         if (firstNum && !secondNum) return 1;
         if (!firstNum && secondNum) return -1;
-        
+
         // numerically or lexicallly check
         if (a < b) return 1;
         if (a > b) return -1;
@@ -56,22 +56,22 @@ export class Version {
     constructor(ver: string) {
         // trim leading and trailing whitespace
         ver = ver.trim();
-        
+
         // match the version string
         const match = ver.match(semver);
-        
+
         // failed to match
         if (!match)
             throw `unexpected version string: ${ver}`;
-        
+
         // process numbers
         this.major = +match[1];
         this.minor = +match[2];
         this.patch = +match[3];
-        
+
         if (isNaN(this.major) || isNaN(this.minor) || isNaN(this.patch))
             throw `major.minor.patch must be a number`;
-        
+
         // process pre release
         this.pre = match[4]?.split(".").map(v => {
             const n = +v;
@@ -79,7 +79,7 @@ export class Version {
                 return n;
             return v;
         }) || [];
-        
+
         // build metadata
         this.build = match[5]?.split(".") || [];
     }
@@ -304,7 +304,7 @@ export class Expression {
                     patch: patch,
                     pre: pre,
                 });
-            };
+            }
             comparators.push(list);
         }
         this._compiled = comparators;
