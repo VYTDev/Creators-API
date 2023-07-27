@@ -48,7 +48,7 @@ function ask(question) {
     extendLine(" done");
     // show versions
     consoleLog("available versions:")
-    releases.forEach(v => console.log("  " + v.name));
+    releases.forEach(v => consoleLog("  " + v.name));
     let version, choosen;
     // ask the user
     while (true) {
@@ -64,17 +64,23 @@ function ask(question) {
     // type declarations of the framework
     const types = version.assets.find(v => v.name == "framework-types.zip");
     // download type declarations
-    console.log(`downloading type declarations of Creators’ API Framework ${choosen} ...`)
-    const buf = await downloadFile(types.browser_download_url);
+    consoleLog(`downloading type declarations of Creators’ API Framework ${choosen} ...`);
+    let buf;
+    try {
+        buf = await downloadFile(types.browser_download_url);
+    } catch {
+        consoleLog("failed to download types declaration package");
+        process.exit(1);
+    }
     // extract package
-    console.log("unpacking framework...");
+    consoleLog("unpacking framework...");
     let zip;
     try {
         zip = await JSZip.loadAsync(buf);
         extendLine(" done");
     } catch {
-        console.log("archive failed to extract");
-        console.log("from: " + types.browser_download_url);
+        consoleLog("archive failed to extract");
+        consoleLog("from: " + types.browser_download_url);
         process.exit(1);
     }
     // remove current installed types

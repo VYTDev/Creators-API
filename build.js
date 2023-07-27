@@ -94,4 +94,26 @@ lib.generateNodeStream({
         console.log("created lib package");
     });
 
+// package pdk
+console.log("packing kit");
+const pdk = new JSZip();
+for (const [root, dirs, files] of walkTree("./pdk")) {
+    const relroot = root.slice("./pdk".length + 1);
+    for (const file of files) {
+        const path = relroot + "/" + file;
+        pdk.file(path, fs.readFileSync(root + "/" + file));
+    }
+}
+pdk.generateNodeStream({
+    type: "nodebuffer",
+    compression: "DEFLATE",
+    compressionOptions: {
+        level: 9
+    }
+})
+    .pipe(fs.createWriteStream("./dist/framework-pdk.zip"))
+    .on("finish", () => {
+        console.log("created pdk package");
+    });
+
 })();
