@@ -1,0 +1,21 @@
+/* This file haves the important informations for the plugin */
+{
+    /* The id of your plugin, used when resolving in a require */
+    "id": "myplugin",
+    /* Optional name of your plugin (optional) */
+    "name": "Plugin name",
+    /* Version name of your plugin, based on semver spec */
+    "version": "0.1.0-0",
+    /* API Engine version your plugin needs, don't change (optional) */
+    "engine": ">=0.1.0-0",
+    /* The entry point of the plugin (optional) */
+    "entry": "index.js",
+    /* Additional dependencies required by your plugin (optional) */
+    "dependencies": { },
+    /* Your name (optional) */
+    "author": "Name here",
+    /* Plugin license (optional) */
+    "license": "MIT",
+    /* Homepage of your plugin (optional) */
+    "url": "https://www.example.com/plugin"
+}

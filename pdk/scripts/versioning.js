@@ -1,4 +1,8 @@
+// from the generated code of Creators’ API framework
+// see: https://github.com/vytdev/creators-api/blob/master/src/plugins/versioning.ts
+
 // Simple versioning system for plugins
+
 // Based on npm package 'semver' <https://github.com/npm/node-semver>
 // semantic versioning: (see semver.org)
 const semver = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/;
@@ -48,7 +52,7 @@ function comparePre(a, b) {
 /**
  * Main versioning class
  */
-export class Version {
+class Version {
     /**
      * Creates a new version instance.
      * @param ver The version string to compile
@@ -150,7 +154,7 @@ const expression = /^([*0xX]|[1-9]\d*)(?:\.([*0xX]|[1-9]\d*)(?:\.([*0xX]|[1-9]\d
 /**
  * Version expression
  */
-export class Expression {
+class Expression {
     /**
      * Initialize a new version expression instance
      * @param expr The expression to compile
@@ -389,4 +393,10 @@ export class Expression {
     toString() {
         return this._expr;
     }
+}
+
+// export classes
+module.exports = {
+    Version,
+    Expression
 }

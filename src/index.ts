@@ -7,6 +7,9 @@ export * as plugins from "./plugins/index.js";
 import { Version } from "./plugins/versioning.js";
 export const version = new Version("0.1.0");
 
+// export native libs
+export * from "./native/index.js";
+
 // make shortcut for import star as
 import * as pkg from "./index.js";
 export default pkg;

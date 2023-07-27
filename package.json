@@ -3,7 +3,6 @@
     "version": "0.1.0",
     "description": "A Minecraft Bedrock Edition script addon.",
     "typings": "./typings/index.d.ts",
-    "type": "module",
     "scripts": {
         "test": "tsc && npm run lint",
         "build": "tsc -b",
@@ -31,7 +30,9 @@
         "@typescript-eslint/eslint-plugin": "^5.33.0",
         "@typescript-eslint/parser": "^5.33.0",
         "eslint": "^8.4.2",
-        "typescript": "^5.1.0"
+        "typescript": "^5.1.0",
+        "esbuild": "^0.18.17",
+        "jszip": "^3.10.1"
     },
     "dependencies": {
         "@minecraft/server": "^1.4.0-beta.1.20.10-preview.24",

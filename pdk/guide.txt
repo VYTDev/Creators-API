@@ -1,0 +1,124 @@
+
+Plugin Development Kit
+----------------------------------------------------------------
+
+This kit was exclusively created for the Creators’ API Framework, a Minecraft: Bedrock
+Edition framework for creating amaizing interactive features to the game. The pre-built
+plugin loader in the framework was intented to create, manage, and to distribute
+custom extensions for the API. This kit will help you to make your plugins for the
+framework.
+
+REQUIREMENTS
+============
+
+To be able to get started, you need to have the following:
+
+- CLI (like Termux on Android)
+- NodeJS (I prefer the stable version)
+- Git (optional, but required when you're publishing)
+- Code editor, like VSCode
+- Knowledge in TypeScript language
+
+SETUP
+=====
+
+To get started, you need change some files first;
+
+  - LICENSE             Change to your needed license
+  - README.md           Some introduction for your plugin
+  - package.json        Customize it
+  - plugin.json         Manifest file of the plugin
+
+To install your dependencies, you must run `npm i` and `npm run deps`. This will
+automatically install your dependencies to the `node_modules` folder. See the
+'Dependency' section below.
+
+    NOTE:
+    
+        This will only install your dependencies found on the plugin registry
+    index. See:  https://github.com/vytdev/plugins-dex
+
+BUILDING
+========
+
+Once you've done with your setup, you can now start to create your plugin! You must
+edit the `.ts` source files on `src` folder. After editing, run `tsc` to compile
+your plugin. To generate the distribution files, run `npm run build`. The script
+will create a bundle and package the plugin on 'dist' folder.
+
+DEPENDENCIES
+============
+
+The API comes with a plugin registry index. This index makes it easy for the community
+to distribute and install third-party Creators’ API plugins. See the 'Publishing'
+section for details how to publish your plugin.
+
+The kit comes with a script called `deps.js`. That script will do the installation
+of your plugin types declarations for you, but first, you need to specify your
+dependencies on the manifest file:
+
+ 1. Open `plugin.json`
+ 2. Add a section called 'dependencies', it must be an object where its keys are
+    the plugin id and the values is the version range.
+ 3. Add your dependencies there
+
+After that, run the following command:
+
+    npm run deps
+
+This would install your dependencies. The script is only meant to install the types
+declaration of your dependencies.
+
+    NOTE:
+    
+        You must not run the script before doing any npm operations on the project
+    that will change the `node_modules` folder (like `ci`, `install`, etc.).
+
+MIGRATING
+=========
+
+If you want to migrate with your existing plugin into other versions of the framework,
+you must do the following steps:
+
+ 1. Run the command `npm run migrate`, the script would ask you what version of the
+    framework you want to install.
+ 2. Choose one from the printed lists (the 'v' prefix is not needed)
+
+The script will download the types package of your choosen version of the framework.
+
+PUBLISHING
+==========
+
+To publish your plugin, create a release on your plugin's GitHub repository and add
+the generated file `package.plg` (don't change the filename). Then fork to the plugin
+registry index repo on GitHub and clone it locally:
+
+    git clone https://github.com/<username>/plugins-dex.git
+
+`cd` to the repo and run `npm i` to install node dependencies. There's a file
+called `dex.js`. It's a script you can use to manage the index. Copy your `plugin.json`
+file to the cloned repo and run `node ./dex.js update`. This is to index your plugin
+information, especially for dependencies so it can be easily resolved. If the script
+sent you a message like this:
+
+    error: plugin 'ID' not found on index.
+
+... you need to register your plugin on the registry first. To do that, run the
+command:
+
+    node ./dex.js register <id> <user> <repo>
+
+ *More info and reference to the CLI can be found by running `node ./dex.js` (no params).
+
+After running those commands, confirm if the plugin was added to the index by running:
+
+    node ./dex.js show <plugin_id>
+
+After that, stage and commit your changes and push to GitHub. Then open a pull
+request.
+
+    git add .
+    git commit -m "your commit message"
+    git push
+
+Now your plugin is available on index, and your plugin will be available in public.

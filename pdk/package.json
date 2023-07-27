@@ -1,0 +1,38 @@
+{
+    "name": "PDK",
+    "version": "0.1.0",
+    "description": "Plugin Development Kit",
+    "typings": "./types/index.d.ts",
+    "scripts": {
+        "test": "npm run build && npm run lint",
+        "build": "tsc && node ./scripts/build.js",
+        "deps": "node ./scripts/deps.js",
+        "migrate": "node ./scripts/migrate.js",
+        "cache": "rm -rf ./.cache",
+        "clean": "rm -rf ./build; rm -rf ./dist",
+        "watch": "tsc -w",
+        "lint": "eslint \"./src/**\" --ext .ts"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/vytdev/creators-api.git"
+    },
+    "author": "VYT",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/vytdev/creators-api/issues"
+    },
+    "homepage": "https://github.com/vytdev/creators-api#readme",
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^5.33.0",
+        "@typescript-eslint/parser": "^5.33.0",
+        "eslint": "^8.4.2",
+        "typescript": "^5.1.0",
+        "jszip": "^3.10.1",
+        "strip-json-comments": "^3.1.1"
+    },
+    "dependencies": {
+        "@minecraft/server": "^1.4.0-beta.1.20.10-preview.24",
+        "@minecraft/server-ui": "^1.0.0"
+    }
+}

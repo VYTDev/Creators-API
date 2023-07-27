@@ -1,25 +1,28 @@
 {
     "compilerOptions": {
-        "module": "es2020",
+        "module": "commonjs",
         "moduleResolution": "node",
         "noImplicitAny": true,
         "noImplicitThis": true,
         "allowSyntheticDefaultImports": true,
         "forceConsistentCasingInFileNames": true,
-        "target": "es2020",
+        "target": "es2022",
         "lib": [
             "es2020",
             "dom"
         ],
         "preserveConstEnums": true,
         "sourceMap": false,
-        "outDir": "./dist/generated",
+        "outDir": "./build",
         "declaration": true,
-        "declarationDir": "./pdk/api",
+        "declarationDir": "./types",
         "allowJs": true,
-        "baseUrl": "./src"
+        // allows you to import built-in plugins
+        "baseUrl": "./api/native"
     },
     "include": [
-        "./src"
+        "./src/**/*.ts",
+        "./api/index.d.ts",
+        "./global.d.ts"
     ]
 }
