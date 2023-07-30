@@ -16,13 +16,13 @@ export default pkg;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const globalThis: any;
-// expose this framework to global scope (jQuery on Minecraft hahaha)
-globalThis.$ = globalThis.creator = pkg;
+// expose this framework to global scope
+globalThis.creator = pkg;
 
 // make it type safe
 declare global {
-  /**
-   * A framework that will help you to create amaizing Minecraft features.
-   */
-  const creator: typeof pkg;
+    /**
+     * A framework that will help you to create amaizing Minecraft features.
+     */
+    const creator: typeof pkg;
 }

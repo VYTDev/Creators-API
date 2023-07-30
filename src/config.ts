@@ -2,7 +2,7 @@
 * @class
 * A class for handling configs
 */
-export class Config <T extends object> {
+export class Config<T extends object> {
     /**
     * Initialize a new instance of this class
     * @param data The config data

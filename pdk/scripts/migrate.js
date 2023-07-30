@@ -32,7 +32,7 @@ function ask(question) {
 }
 
 (async () => {
-    consoleLog("getting release information...")
+    consoleLog("getting release information...");
     // get a list of releases using the github rest api
     let releases;
     try {

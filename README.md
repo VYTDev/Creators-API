@@ -1,17 +1,23 @@
 # Creators’ API
 
-A simple add-on for Minecraft Bedrock to help you in administrating servers or
+A simple framework for Minecraft Bedrock to help you in administrating servers or
 multiplayer games.
 
 [*Project Documentation*](https://vytdev.github.io/en/projects/creators-api)
 
-> **Warning**: This project is still under development, means it dosen't ready for
- production use. Please make backups of your worlds before using this add-on on it.
+> **Warning**: This project is still under development, means it dosen't ready yet
+ for production use.
 
-Currently, this add-on has the following features:
+Currently, this framework has the following features:
 
-- Events emitter
-- Multi-threading
+- Plugin API
+- Events Handler
+
+## Installing
+
+To install the framework, download one on the [releases section][rel] and put it
+on your add-on. You can import the framework or access it globally with the `creator`
+namespace (only if its loaded).
 
 ## Contributing
 
@@ -23,3 +29,5 @@ Copyright &copy; 2022, Vincent Yanzee J. Tan.
 This project is licensed under the [MIT License](LICENSE).
 
 *Thanks for visiting!*
+
+[rel]: https://github.com/vytdev/creators-api/releases

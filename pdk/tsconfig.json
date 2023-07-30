@@ -17,7 +17,7 @@
         "declaration": true,
         "declarationDir": "./types",
         "allowJs": true,
-        // allows you to import built-in plugins
+        // allows you to import built-in plugins, don't change
         "baseUrl": "./api/native"
     },
     "include": [
