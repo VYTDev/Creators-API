@@ -49,7 +49,7 @@ function ask(question) {
     extendLine(" done");
     // show versions
     consoleLog("available versions:")
-    releases.forEach(v => consoleLog("  " + v.name));
+    releases.forEach(v => consoleLog("  " + v.tag_name));
     const latest = new ver.Expression("*").latest(releases.map(v => new ver.Version(v.tag_name.slice(1)))).toString();
     let version, choosen;
     // ask the user
