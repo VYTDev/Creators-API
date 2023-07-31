@@ -46,7 +46,8 @@ export type MinecraftEventList = {
     afterPlayerSpawn: [mc.PlayerSpawnAfterEvent],
     afterPressurePlatePop: [mc.PressurePlatePopAfterEvent],
     afterPressurePlatePush: [mc.PressurePlatePushAfterEvent],
-    afterProjectileHit: [mc.ProjectileHitAfterEvent],
+    afterProjectileHitBlock: [mc.ProjectileHitBlockAfterEvent],
+    afterProjectileHitEntity: [mc.ProjectileHitEntityAfterEvent],
     afterTargetBlockHit: [mc.TargetBlockHitAfterEvent],
     afterTripWireTrip: [mc.TripWireTripAfterEvent],
     afterWeatherChange: [mc.WeatherChangeAfterEvent],
@@ -102,7 +103,8 @@ mc.world.afterEvents.playerLeave.subscribe((ev: mc.PlayerLeaveAfterEvent) => han
 mc.world.afterEvents.playerSpawn.subscribe((ev: mc.PlayerSpawnAfterEvent) => handler.dispatchEvent("afterPlayerSpawn", ev));
 mc.world.afterEvents.pressurePlatePop.subscribe((ev: mc.PressurePlatePopAfterEvent) => handler.dispatchEvent("afterPressurePlatePop", ev));
 mc.world.afterEvents.pressurePlatePush.subscribe((ev: mc.PressurePlatePushAfterEvent) => handler.dispatchEvent("afterPressurePlatePush", ev));
-mc.world.afterEvents.projectileHit.subscribe((ev: mc.ProjectileHitAfterEvent) => handler.dispatchEvent("afterProjectileHit", ev));
+mc.world.afterEvents.projectileHitBlock.subscribe((ev: mc.ProjectileHitBlockAfterEvent) => handler.dispatchEvent("afterProjectileHitBlock", ev));
+mc.world.afterEvents.projectileHitEntity.subscribe((ev: mc.ProjectileHitEntityAfterEvent) => handler.dispatchEvent("afterProjectileHitEntity", ev));
 mc.world.afterEvents.targetBlockHit.subscribe((ev: mc.TargetBlockHitAfterEvent) => handler.dispatchEvent("afterTargetBlockHit", ev));
 mc.world.afterEvents.tripWireTrip.subscribe((ev: mc.TripWireTripAfterEvent) => handler.dispatchEvent("afterTripWireTrip", ev));
 mc.world.afterEvents.weatherChange.subscribe((ev: mc.WeatherChangeAfterEvent) => handler.dispatchEvent("afterWeatherChange", ev));
