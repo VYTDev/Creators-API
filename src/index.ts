@@ -5,7 +5,7 @@ export * as plugins from "./plugins/index.js";
 
 // export version of the framework
 import { Version } from "./plugins/versioning.js";
-export const version = new Version("0.1.0");
+export const version = new Version("0.2.0");
 
 // export native libs
 export * from "./native/index.js";

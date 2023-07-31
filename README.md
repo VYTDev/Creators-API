@@ -3,7 +3,8 @@
 A simple framework for Minecraft Bedrock to help you in administrating servers or
 multiplayer games.
 
-[*Project Documentation*](https://vytdev.github.io/en/projects/creators-api)
+*Currently, the documentation at GitHub Pages are outdated. Please refer to the
+types at the moment while I'm updating the docs.*
 
 > **Warning**: This project is still under development, means it dosen't ready yet
  for production use.
@@ -21,7 +22,7 @@ namespace (only if its loaded).
 
 ## Contributing
 
-See the [docs](https://vytdev.github.io/en/projects/creators-api/contributing).
+Any of contributions are welcome! Feel free to contribute to the project.
 
 ## License
 
