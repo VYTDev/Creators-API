@@ -38,6 +38,7 @@ console.log("creating bundles");
 await build({
     entryPoints: ["./dist/generated/index.js"],
     outfile: "./dist/framework.js",
+    external: ["@minecraft/server", "@minecraft/server-ui"],
     format: "esm",
     bundle: true,
     minify: false,
@@ -45,6 +46,7 @@ await build({
 await build({
     entryPoints: ["./dist/framework.js"],
     outfile: "./dist/framework.min.js",
+    external: ["@minecraft/server", "@minecraft/server-ui"],
     format: "esm",
     bundle: true,
     minify: true,
