@@ -1,3 +1,12 @@
+Creator's API is one of my oldest projects from my early days of programming. It's
+the first scripting add-on I ever made, and the project was started in 2021. The
+files in this repository might have been created just last year, but that's
+because I lost my oldest copy of it. I uploaded it to serve as an archive and as
+inspiration to continue my programming journey! Here's the beginning of the
+original readme:
+
+
+
 # Creators’ API
 
 A simple framework for Minecraft Bedrock to help you in administrating servers or
